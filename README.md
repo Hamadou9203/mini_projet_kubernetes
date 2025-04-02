@@ -1,5 +1,5 @@
-     #### Déployez PayMyBuddy à l’aide de manifests
-         ##Contexte
+     ####. Déployez PayMyBuddy à l’aide de manifests
+         ##. Contexte
          
     Il s'agit de déployer l'application SpringBoot PayMyBuddy à l'aide de manifests yaml 
 
