@@ -15,7 +15,7 @@ Docker build -t <pseudo>/paymybuddy .
 ```
 sur notre cluster 
 
-nous aurons besoin de créer un namespace  et secret et une configmap 
+nous aurons besoin de créer un namespace, un secret et une configmap 
 ```
 kubectl create namespace paymybuddy
 kubectl create secret generic backend-user --from-literal=db-password='xxxx' -n paymybuddy 
