@@ -45,3 +45,5 @@ mysql-pdy-svc   ClusterIP   172.17.20.128   <none>        3306/TCP         20h
 pdy-service     NodePort    172.17.37.227   <none>        8080:30050/TCP   20h
 ```
 
+![cover](img/pay1.png) 
+![cover](img/pay2.png) 
