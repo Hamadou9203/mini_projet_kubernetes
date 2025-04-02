@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pdy-deployment
+  namespace: paymybuddy
+  labels:
+    app: pdy
+    tier: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pdy
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: pdy
+        tier: frontend
+    spec:
+      containers:
+      - name: pdy-dep
+        image: meskine/paymybuddy
+        env:
+          - name: SPRING_DATASOURCE_URL 
+            value: "jdbc:mysql://mysql-pdy-svc:3306/db_paymybuddy"
+          - name: SPRING_DATASOURCE_USERNAME
+            value: root
+          - name: SPRING_DATASOURCE_PASSWORD
+            valueFrom:
+                secretKeyRef:
+                   name: backend-user
+                   key: db-password
+        ports:
+        - containerPort: 8080
+

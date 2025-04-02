@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  namespace: paymybuddy
+  labels:
+    app: pdy
+    tier: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pdy
+      tier: db
+  template:
+    metadata:
+      labels:
+        app: pdy
+        tier: db
+    spec:
+      volumes:
+        - name: mysql-volume
+          persistentVolumeClaim:
+              claimName: mysql-pvc-pdy
+        - name: mysql-data
+          configMap:
+             name: data-config
+      containers:
+      - name: mysql
+        image: mysql
+        volumeMounts:
+           - mountPath: "/var/lib/mysql"
+             name: mysql-volume
+           - mountPath: "/tmp/source"
+             name: mysql-data
+        env:
+          - name: MYSQL_DATABASE 
+            value: db_paymybuddy
+          - name:  MYSQL_ROOT_PASSWORD
+            valueFrom:
+                  secretKeyRef:
+                       name: backend-user
+                       key: db-password
+
+
